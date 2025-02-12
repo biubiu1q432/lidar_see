@@ -11,9 +11,9 @@ root_dir = r"datasets"
 #读取文件夹下所有文件
 csv_list = os.listdir(root_dir)
 
-for i in csv_list:
+for i in range(len(csv_list)):
     
-    csv_file_path = os.path.join(root_dir, i)
+    csv_file_path = csv_file_path_template.format(i + 1)
     
     # 初始化坐标列表
     x_coords = []
@@ -45,7 +45,7 @@ for i in csv_list:
                 continue
 
     # 创建3D散点图
-    fig = plt.figure(figsize=(10, 8))  # 调整图形大小
+    fig = plt.figure(figsize=(16, 9))  # 调整图形大小为全屏
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(x_coords, y_coords, z_coords, c='r', marker='o')
 
@@ -60,8 +60,10 @@ for i in csv_list:
     print(f"文件 {csv_file_path} 的点云数据量为：{len(x_coords)}, 时间戳为：{timestamp}")
 
     # 显示图形
+    manager = plt.get_current_fig_manager()
+    manager.window.showMaximized()
     plt.show()
-    
+
 
 
 
